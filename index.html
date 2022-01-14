@@ -8,6 +8,10 @@
     <meta name="Description" content="Enter your description here" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/style.css" />
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+  ></script>
 
     <title>Weather App</title>
 </head>
@@ -38,8 +42,13 @@
 
         <section class="col-12 col-md-8 col-xl-9 d-flex flex-column">
             <div>
-                <h3>Showing result for<span id="result-city"></span></h3>
-                <div id="result-city-content"></div>
+                <h3><span id="result-city"></span><span id="today-date"></span></h3>
+                    <div id="result-city-content">
+                        <p id="temp">Temp:</p>
+                        <p id="wind">Wind:</p>
+                        <p id="humidity">Humidity</p>
+                        <p id="uv-index">UV Index:</p>
+                    </div>
             </div>
 
             <div>

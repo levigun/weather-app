@@ -18,4 +18,4 @@ function handleSearchFormSubmit(event) {
     location.assign(searchCityVal);
   }
   
-  searchCityEl.addEventListener('submit', handleSearchFormSubmit);
+searchCityEl.addEventListener('submit', handleSearchFormSubmit);
