@@ -20,11 +20,14 @@ searchButtonEl.addEventListener('click', function(event){
         var today = moment();
         var windValue = data['wind']['speed']
 
+        var tempValueCelcius = Math.round(tempValue-273.15)
+
+
         document.getElementById('result-city').innerHTML = cityNameValue
-        document.getElementById('temp').innerHTML = 'Temp: ' + tempValue
+        document.getElementById('temp').innerHTML = 'Temp: ' + tempValueCelcius + ' \u00B0C'
         document.getElementById('wind').innerHTML = 'Wind: ' + windValue + ' MPH'
         document.getElementById('humidity').innerHTML = 'Humidity: ' + humidityValue + '%'
-        document.getElementById('today-date').innerHTML.textContent(today.format("MMM Do, YYYY"));
+        // document.getElementById('today-date').innerHTML.textContent(today.format("MMM Do, YYYY"));
         console.log(data);
     })
     .catch((error)=> {
