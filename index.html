@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="Enter your description here" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/style.css" /> 
+    <link rel="stylesheet" href="assets/style.css" />
 
     <title>Weather App</title>
 </head>
@@ -20,35 +20,37 @@
 
 <body>
 
-    <form class="col-12 col-md-4 col-xl-3 d-flex flex-column align-items-center">
-        <h3 class="p-0 text-center">Search for a City:</h3>
-        <input type="text" id="city-user-choice">
-        <button type="submit" class="btn btn-primary btn-block my-3" id="search-button">Search</button>
-            
-        <hr>
-        
-        <div class="w-100">
-            <ul class="city-list">
-                <li><button type="button" class="btn btn-secondary btn-block text-white ">Denver</button></li>
-            </ul>
-        </div>
+    <main class="container row">
+        <form class="col-12 col-md-4 col-xl-3 d-flex flex-column align-items-center">
+            <h3 class="p-0 text-center">Search for a City:</h3>
+            <input type="text" id="search-city">
+            <button type="submit" class="btn btn-primary btn-block my-3" id="search-button">Search</button>
 
-    </form>
+            <hr>
 
-    <main> 
+            <div class="w-100">
+                <ul class="city-list">
+                    <!-- <li><button type="button" class="btn btn-secondary btn-block text-white "><span id="city-name"></span></button></li> -->
+                </ul>
+            </div>
+
+        </form>
+
+        <section class="col-12 col-md-8 col-xl-9 d-flex flex-column">
+            <div>
+                <h3>Showing result for<span id="result-city"></span></h3>
+                <div id="result-city-content"></div>
+            </div>
+
+            <div>
+                <h4>5-Day Forecast:</h4>
+                <div id="city-future-forecast"></div>
+            </div>
 
 
 
+        </section>
     </main>
-
-    
-
-
-
-
-
-
-
 
 
 

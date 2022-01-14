@@ -1,0 +1,1 @@
+var searchCityEl = document.querySelector('#search-city')
