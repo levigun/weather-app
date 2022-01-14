@@ -17,13 +17,14 @@ searchButtonEl.addEventListener('click', function(event){
         var tempValue = data['main']['temp'];
         var cityNameValue = data['name'];
         var humidityValue = data['main']['humidity'];
+        var today = moment();
         var windValue = data['wind']['speed']
 
-        document.getElementById('result-city').value = cityNameValue
-        document.getElementById('today-date').value = moment().today
-        document.getElementById('temp').value = tempValue
-        document.getElementById('wind').value = windValue
-        document.getElementById('humidity').value = humidityValue
+        document.getElementById('result-city').innerHTML = cityNameValue
+        document.getElementById('temp').innerHTML = 'Temp: ' + tempValue
+        document.getElementById('wind').innerHTML = 'Wind: ' + windValue + ' MPH'
+        document.getElementById('humidity').innerHTML = 'Humidity: ' + humidityValue + '%'
+        document.getElementById('today-date').innerHTML.textContent(today.format("MMM Do, YYYY"));
         console.log(data);
     })
     .catch((error)=> {
