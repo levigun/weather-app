@@ -16,7 +16,7 @@ var apiKey = `4f91554c02ad030923836326342b4267`;
 // created a click evetn function for the search button
 searchButtonEl.addEventListener('click', function (event) {
     event.preventDefault();
-    forecastHeading.textContent = "7-Day Forecast:";
+    forecastHeading.textContent = "5-Day Forecast:";
     // fetched current weather data
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + userCity.value + `&appid=${apiKey}`)
         .then(function (response) {
@@ -52,7 +52,7 @@ searchButtonEl.addEventListener('click', function (event) {
                     data.daily.forEach((day, idx) => {
                         if (idx == 0) {
                             cityFutureForecast.innerHTML = ``
-                        } else {
+                        } else if(idx < 6){
                             futureForecast += ` <div class="weather-forecast-item">
                         <div class="day">${window.moment(day.dt * 1000).format('L')}</div>
                         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
@@ -60,6 +60,8 @@ searchButtonEl.addEventListener('click', function (event) {
                         <div class="wind">Wind: ${day.wind_speed}MPH</div>
                         <div class="Humidity">Humidity: ${day.humidity}%</div>
                     </div>`
+                        } else {
+                            cityFutureForecast.innerHTML = ``
                         }
 
                     })
