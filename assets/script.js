@@ -45,7 +45,19 @@ searchButtonEl.addEventListener('click', function (event) {
                 })
                 .then(function (data) {
                     console.log(data);
-                    uvIndex.textContent = "UV Index: " + data.daily[0].uvi;
+                    var uvIndexVal = data.daily[0].uvi;
+                    uvIndex.textContent = "UV Index: " + uvIndexVal;
+                        if(uvIndexVal <= 2) {
+                            uvIndex.classList.add("uvIndex", "uvIndexLow");
+                        } if(3 <= uvIndexVal <= 5) {
+                            uvIndex.classList.add("uvIndex", "uvIndexModerate");
+                        } if( 6 <= uvIndexVal <= 7) {
+                            uvIndex.classList.add("uvIndex", "uvIndexHigh");
+                        } if(8 <= uvIndexVal <= 10) {
+                            uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
+                        } if(uvIndexVal > 10) {
+                            uvIndex.classList.add("uvIndex", "uvIndexExtreme");
+                        }
 
 
                     let futureForecast = '';
@@ -56,7 +68,7 @@ searchButtonEl.addEventListener('click', function (event) {
                             futureForecast += ` <div class="weather-forecast-item">
                         <div class="day">${window.moment(day.dt * 1000).format('L')}</div>
                         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
-                        <div class="temp">Temp: ${day.temp.night}&#176; C</div>
+                        <div class="temp">Temp: ${Math.round(day.temp.night)}&#176; C</div>
                         <div class="wind">Wind: ${day.wind_speed}MPH</div>
                         <div class="Humidity">Humidity: ${day.humidity}%</div>
                     </div>`

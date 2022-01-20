@@ -28,3 +28,29 @@ hr {
     border-radius: 10px;
 }
 
+.uvIndex {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    /* width: 30px; */
+}
+
+.uvIndexLow {
+    background-color: green;
+}
+
+.uvIndexModerate {
+    background-color: yellow;
+}
+
+.uvIndexHigh {
+    background-color: orange ;
+}
+
+.uvIndexVeryHigh {
+    background-color: red ;
+}
+
+.uvIndexVeryExtreme {
+    background-color: violet ;
+}
