@@ -49,13 +49,13 @@ searchButtonEl.addEventListener('click', function (event) {
                     uvIndex.textContent = "UV Index: " + uvIndexVal;
                         if(uvIndexVal <= 2) {
                             uvIndex.classList.add("uvIndex", "uvIndexLow");
-                        } if(3 <= uvIndexVal <= 5) {
+                        } else if(uvIndexVal >= 3, uvIndexVal <= 5) {
                             uvIndex.classList.add("uvIndex", "uvIndexModerate");
-                        } if( 6 <= uvIndexVal <= 7) {
+                        } else if(uvIndexVal >= 6, uvIndexVal <= 7) {
                             uvIndex.classList.add("uvIndex", "uvIndexHigh");
-                        } if(8 <= uvIndexVal <= 10) {
+                        } else if(uvIndexVal >= 8, uvIndexVal <= 10) {
                             uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
-                        } if(uvIndexVal > 10) {
+                        } else {
                             uvIndex.classList.add("uvIndex", "uvIndexExtreme");
                         }
 
