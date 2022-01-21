@@ -13,10 +13,8 @@ var forecastHeading = document.getElementById('forecast-heading');
 // created var for apikey
 var apiKey = `4f91554c02ad030923836326342b4267`;
 
-// created a click evetn function for the search button
-searchButtonEl.addEventListener('click', function (event) {
-    event.preventDefault();
-    forecastHeading.textContent = "5-Day Forecast:";
+// created function to get the city weather information 
+function getCityInfo() {
     // fetched current weather data
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + userCity.value + `&appid=${apiKey}`)
         .then(function (response) {
@@ -32,6 +30,7 @@ searchButtonEl.addEventListener('click', function (event) {
             temp.textContent = "Temp: " + (Math.round(data.main.temp) - 273) + " \u00B0C";
             wind.textContent = "Wind: " + data.wind.speed + " MPH";
             humidity.textContent = "Humidity: " + Math.round(data.main.humidity) + " %";
+            forecastHeading.textContent = "5-Day Forecast:";
 
 
             console.log(data.coord);
@@ -47,24 +46,25 @@ searchButtonEl.addEventListener('click', function (event) {
                     console.log(data);
                     var uvIndexVal = data.daily[0].uvi;
                     uvIndex.textContent = "UV Index: " + uvIndexVal;
-                        if(uvIndexVal <= 2) {
-                            uvIndex.classList.add("uvIndex", "uvIndexLow");
-                        } else if(uvIndexVal >= 3, uvIndexVal <= 5) {
-                            uvIndex.classList.add("uvIndex", "uvIndexModerate");
-                        } else if(uvIndexVal >= 6, uvIndexVal <= 7) {
-                            uvIndex.classList.add("uvIndex", "uvIndexHigh");
-                        } else if(uvIndexVal >= 8, uvIndexVal <= 10) {
-                            uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
-                        } else {
-                            uvIndex.classList.add("uvIndex", "uvIndexExtreme");
-                        }
+                    // create if statements for the differen uvi range color backgrounds
+                    if (uvIndexVal <= 2) {
+                        uvIndex.classList.add("uvIndex", "uvIndexLow");
+                    } else if (uvIndexVal >= 3, uvIndexVal <= 5) {
+                        uvIndex.classList.add("uvIndex", "uvIndexModerate");
+                    } else if (uvIndexVal >= 6, uvIndexVal <= 7) {
+                        uvIndex.classList.add("uvIndex", "uvIndexHigh");
+                    } else if (uvIndexVal >= 8, uvIndexVal <= 10) {
+                        uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
+                    } else {
+                        uvIndex.classList.add("uvIndex", "uvIndexExtreme");
+                    }
 
-
+                    // setting values for the coming 5-day future forecast
                     let futureForecast = '';
                     data.daily.forEach((day, idx) => {
                         if (idx == 0) {
                             cityFutureForecast.innerHTML = ``
-                        } else if(idx < 6){
+                        } else if (idx < 6) {
                             futureForecast += ` <div class="weather-forecast-item">
                         <div class="day">${window.moment(day.dt * 1000).format('L')}</div>
                         <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png" alt="weather icon" class="w-icon">
@@ -80,12 +80,35 @@ searchButtonEl.addEventListener('click', function (event) {
                     cityFutureForecast.innerHTML = futureForecast;
                 })
 
-
-
-
-
-
         });
+}
+
+function saveUserCity (){
+    // save the user input city to local storage
+}
+
+function getUserCity () {
+    // get the user input city from local storage
+}
+
+function showUserCityButton (){
+    // show the city name in a button
+    // list the button (?) i want it one on top of the other
+}
+
+function cityButtonShowInfo () {
+    // click the button it wil show the information again
+}
+
+// created a click evetn function for the search button
+searchButtonEl.addEventListener('click', function (event) {
+    event.preventDefault();
+    getCityInfo();
+
+    if (!userCity.value) {
+        alert('Please enter a valid city name!')
+        return;
+    }
+
 });
 
-// local storage for the searched city
