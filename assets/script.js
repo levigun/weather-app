@@ -1,6 +1,7 @@
 // created variables for the DOM elements
 var searchButtonEl = document.getElementById('search-button');
 var resultCityEl = document.getElementById('result-city');
+var cityList = document.getElementById('city-list');
 var todayDate = document.getElementById('today-date');
 var cityFutureForecast = document.getElementById('city-future-forecast');
 var weatherIcon = document.getElementById('icon-weather');
@@ -12,6 +13,8 @@ var uvIndex = document.getElementById('uv-index');
 var forecastHeading = document.getElementById('forecast-heading');
 // created var for apikey
 var apiKey = `4f91554c02ad030923836326342b4267`;
+
+showUserCityButton(); 
 
 // created function to get the city weather information 
 function getCityInfo() {
@@ -49,13 +52,13 @@ function getCityInfo() {
                     // create if statements for the differen uvi range color backgrounds
                     if (uvIndexVal <= 2) {
                         uvIndex.classList.add("uvIndex", "uvIndexLow");
-                    } else if (uvIndexVal >= 3, uvIndexVal <= 5) {
+                    } if (uvIndexVal >= 3, uvIndexVal <= 5) {
                         uvIndex.classList.add("uvIndex", "uvIndexModerate");
-                    } else if (uvIndexVal >= 6, uvIndexVal <= 7) {
+                    } if (uvIndexVal >= 6, uvIndexVal <= 7) {
                         uvIndex.classList.add("uvIndex", "uvIndexHigh");
-                    } else if (uvIndexVal >= 8, uvIndexVal <= 10) {
+                    } if (uvIndexVal >= 8, uvIndexVal <= 10) {
                         uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
-                    } else {
+                    } if (uvIndexVal >= 11) {
                         uvIndex.classList.add("uvIndex", "uvIndexExtreme");
                     }
 
@@ -83,20 +86,40 @@ function getCityInfo() {
         });
 }
 
-function saveUserCity (){
+var userCityVal = [];
+
+function saveUserCity() {
     // save the user input city to local storage
+    localStorage.setItem('city', JSON.stringify(userCity.value));
 }
 
-function getUserCity () {
+function getUserCity() {
     // get the user input city from local storage
+    var storedCity = JSON.parse(localStorage.getItem('city'));
+
+    if (storedCity !== null) {
+        userCityVal = storedCity;
+    }
+    showUserCityButton();
 }
 
-function showUserCityButton (){
+function showUserCityButton() {
     // show the city name in a button
-    // list the button (?) i want it one on top of the other
+    cityList.innerHTML = "";
+
+    for (var i = 0; i < userCityVal.length; i++) {
+        var userCityInput = userCityVal[i];
+
+        // list the button (?) i want it one on top of the other
+        var button = document.createElement("button");
+        button.textContent = userCityInput;
+        button.setAttribute("data-index", i);
+
+        cityList.appendChild(button);
+    }
 }
 
-function cityButtonShowInfo () {
+function cityButtonShowInfo() {
     // click the button it wil show the information again
 }
 
@@ -104,6 +127,11 @@ function cityButtonShowInfo () {
 searchButtonEl.addEventListener('click', function (event) {
     event.preventDefault();
     getCityInfo();
+
+    saveUserCity();
+    getUserCity()
+    showUserCityButton();
+    
 
     if (!userCity.value) {
         alert('Please enter a valid city name!')
