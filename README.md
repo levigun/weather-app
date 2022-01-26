@@ -39,6 +39,8 @@ Follow these instructions on how to use the planner:
 
 ## Weather App Look
 
+![weather-app-look-gif](./assets/images/weather-app-look.gif)
+
 ## Reference
 
 https://coding-boot-camp.github.io/full-stack/github/professional-readme-guide
