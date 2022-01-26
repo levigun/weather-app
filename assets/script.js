@@ -17,9 +17,9 @@ var apiKey = `4f91554c02ad030923836326342b4267`;
 showUserCityButton(); 
 
 // created function to get the city weather information 
-function getCityInfo() {
+function getCityInfo(city) {
     // fetched current weather data
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + userCity.value + `&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=` + city + `&appid=${apiKey}`)
         .then(function (response) {
             return response.json();
         })
@@ -52,13 +52,13 @@ function getCityInfo() {
                     // create if statements for the differen uvi range color backgrounds
                     if (uvIndexVal <= 2) {
                         uvIndex.classList.add("uvIndex", "uvIndexLow");
-                    } if (uvIndexVal >= 3, uvIndexVal <= 5) {
+                    } else if (uvIndexVal > 2, uvIndexVal <= 5) {
                         uvIndex.classList.add("uvIndex", "uvIndexModerate");
-                    } if (uvIndexVal >= 6, uvIndexVal <= 7) {
+                    } else if (uvIndexVal > 5, uvIndexVal <= 7) {
                         uvIndex.classList.add("uvIndex", "uvIndexHigh");
-                    } if (uvIndexVal >= 8, uvIndexVal <= 10) {
+                    } else if (uvIndexVal > 7, uvIndexVal <= 10) {
                         uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
-                    } if (uvIndexVal >= 11) {
+                    } else {
                         uvIndex.classList.add("uvIndex", "uvIndexExtreme");
                     }
 
@@ -86,47 +86,65 @@ function getCityInfo() {
         });
 }
 
-var userCityVal = [];
+// var userCityVal = [];
 
 function saveUserCity() {
-    // save the user input city to local storage
-    localStorage.setItem('city', JSON.stringify(userCity.value));
+
+    // get the existing cities
+    var cities = getUserCity();
+
+    // save the user input city to the existing cities in local storage
+    cities.push(userCity.value);
+    localStorage.setItem('city', JSON.stringify(cities)); // city key in ls is a string
 }
+
+
 
 function getUserCity() {
     // get the user input city from local storage
-    var storedCity = JSON.parse(localStorage.getItem('city'));
-
+    var storedCity = JSON.parse(localStorage.getItem('city'));  // string
+    
     if (storedCity !== null) {
-        userCityVal = storedCity;
+        return storedCity
+        // userCityVal = storedCity;
     }
-    showUserCityButton();
+    // if empty , then we start with empty array 
+    return [];
 }
 
 function showUserCityButton() {
     // show the city name in a button
     cityList.innerHTML = "";
-
-    for (var i = 0; i < userCityVal.length; i++) {
-        var userCityInput = userCityVal[i];
+    var cities = getUserCity();
+    for (var i = 0; i < cities.length; i++) {
+        var city = cities[i];
 
         // list the button (?) i want it one on top of the other
         var button = document.createElement("button");
-        button.textContent = userCityInput;
+        button.textContent = city;
         button.setAttribute("data-index", i);
-
+        button.classList.add("btn", "btn-secondary", "btn-block", "text-white");
         cityList.appendChild(button);
+
+        // click event listener for button
+        button.addEventListener('click', cityButtonShowInfo);
     }
 }
 
-function cityButtonShowInfo() {
-    // click the button it wil show the information again
+function cityButtonShowInfo(event) {
+    event.preventDefault();
+    // get info from text content of button
+    var city = event.target.textContent;
+    getCityInfo(city);
+
 }
 
 // created a click evetn function for the search button
 searchButtonEl.addEventListener('click', function (event) {
     event.preventDefault();
-    getCityInfo();
+
+
+    getCityInfo(userCity.value);
 
     saveUserCity();
     getUserCity()
