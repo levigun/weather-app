@@ -52,14 +52,19 @@ function getCityInfo(city) {
                     // create if statements for the differen uvi range color backgrounds
                     if (uvIndexVal <= 2) {
                         uvIndex.classList.add("uvIndex", "uvIndexLow");
+                        uvIndex.classList.remove("uvIndexModerate", "uvIndexHigh", "uvIndexVeryHigh", "uvIndexExtreme");
                     } else if (uvIndexVal > 2, uvIndexVal <= 5) {
                         uvIndex.classList.add("uvIndex", "uvIndexModerate");
+                        uvIndex.classList.remove("uvIndexLow", "uvIndexHigh", "uvIndexVeryHigh", "uvIndexExtreme");
                     } else if (uvIndexVal > 5, uvIndexVal <= 7) {
                         uvIndex.classList.add("uvIndex", "uvIndexHigh");
+                        uvIndex.classList.remove("uvIndexModerate", "uvIndexLow", "uvIndexVeryHigh", "uvIndexExtreme");
                     } else if (uvIndexVal > 7, uvIndexVal <= 10) {
                         uvIndex.classList.add("uvIndex", "uvIndexVeryHigh");
+                        uvIndex.classList.remove("uvIndexModerate", "uvIndexHigh", "uvIndexLow", "uvIndexExtreme");
                     } else {
                         uvIndex.classList.add("uvIndex", "uvIndexExtreme");
+                        uvIndex.classList.remove("uvIndexModerate", "uvIndexHigh", "uvIndexVeryHigh", "uvIndexLow");
                     }
 
                     // setting values for the coming 5-day future forecast
