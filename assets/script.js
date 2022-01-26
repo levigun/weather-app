@@ -91,8 +91,7 @@ function getCityInfo(city) {
         });
 }
 
-// var userCityVal = [];
-
+// create a function to save the city input to local storage
 function saveUserCity() {
 
     // get the existing cities
@@ -104,7 +103,7 @@ function saveUserCity() {
 }
 
 
-
+// created a function to get the city from local storage
 function getUserCity() {
     // get the user input city from local storage
     var storedCity = JSON.parse(localStorage.getItem('city'));  // string
@@ -117,6 +116,7 @@ function getUserCity() {
     return [];
 }
 
+// created a function to show the searched city into a button
 function showUserCityButton() {
     // show the city name in a button
     cityList.innerHTML = "";
@@ -136,6 +136,7 @@ function showUserCityButton() {
     }
 }
 
+// created a function to show the weather info when the searched city button is clicked
 function cityButtonShowInfo(event) {
     event.preventDefault();
     // get info from text content of button
